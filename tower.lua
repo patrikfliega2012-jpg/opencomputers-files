@@ -38,6 +38,6 @@ drawText()
 
 -- Rotate to the right
 while true do
- h.setRotationSpeed(0.05)
+ h.setRotation(0.1, 0, 1, 0)
  os.sleep(0.1)
 end
