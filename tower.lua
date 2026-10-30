@@ -13,29 +13,53 @@ local font = {
 }
 
 local word = "ORBITALIS"
+local voxels = {}
+
+-- Build the original 3D voxel wordmark
+for i = 1, #word do
+    local letter = font[word:sub(i,i)]
+
+    for row = 1, 5 do
+        for col = 1, 3 do
+            if letter[row]:sub(col,col) == "1" then
+                voxels[#voxels+1] = {
+                    x = (i-1)*4 + col-1,
+                    y = 5-row
+                }
+            end
+        end
+    end
+end
+
 local frame = 0
 
 while true do
- h.clear()
+    h.clear()
 
- local angle = frame % 40
- local width = math.abs(math.cos(angle * math.pi / 20))
+    local angle = frame * 0.12
+    local c = math.cos(angle)
+    local s = math.sin(angle)
 
- for i = 1, #word do
-  local letter = font[word:sub(i,i)]
+    for _,v in ipairs(voxels) do
+        local x = v.x - 16
+        local z = 0
 
-  for row = 1, 5 do
-   for col = 1, 3 do
-    if letter[row]:sub(col,col) == "1" then
-     local x = 24 + math.floor(((i-5)*4+col-2)*width)
-     local y = 16 + row - 3
+        local rx = x*c - z*s
+        local rz = x*s + z*c
 
-     h.set(x,y,24,1)
+        local scale = 1 / (1 + rz*0.025)
+
+        local px = math.floor(24 + rx*scale)
+        local py = math.floor(14 + v.y*scale)
+        local pz = math.floor(24 + rz*0.08)
+
+        if px >= 1 and px <= 48 and
+           py >= 1 and py <= 32 and
+           pz >= 1 and pz <= 48 then
+            h.set(px,py,pz,1)
+        end
     end
-   end
-  end
- end
 
- frame = frame + 1
- os.sleep(0.12)
+    frame = frame + 1
+    os.sleep(0.08)
 end
