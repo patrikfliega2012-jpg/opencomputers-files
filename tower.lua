@@ -1,4 +1,3 @@
-print("ORBITALIS 3D ROTATION - VERSION 2")
 local h = require("component").getPrimary("hologram")
 assert(h, "Hologram not found")
 
@@ -43,11 +42,9 @@ while true do
         local rx = x * math.cos(angle)
         local rz = x * math.sin(angle)
 
-        local scale = 1 / (1 + rz * 0.025)
-
-        local vx = math.floor(cx + rx * scale + 0.5)
-        local vy = math.floor(cy + y * scale + 0.5)
-        local vz = math.floor(cz + rz * 0.25 + 0.5)
+        local vx = math.floor(cx + rx + 0.5)
+        local vy = math.floor(cy + y + 0.5)
+        local vz = math.floor(cz + rz * 0.5 + 0.5)
 
         if vx >= 1 and vx <= 48
         and vy >= 1 and vy <= 32
@@ -56,6 +53,6 @@ while true do
         end
     end
 
-    angle = angle + 0.06
+    angle = angle + 0.04
     os.sleep(0.05)
 end
