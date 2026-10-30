@@ -1,3 +1,4 @@
+print("ORBITALIS 3D ROTATION - VERSION 2")
 local h = require("component").getPrimary("hologram")
 assert(h, "Hologram not found")
 
