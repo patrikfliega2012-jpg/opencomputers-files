@@ -1,15 +1,19 @@
 local sound = require("component").sound
 
-print("QUANTUM LABS - SOUND DIAGNOSTICS")
-print("Available wave modes:")
+print("QUANTUM LABS AUDIO TEST")
 
-for name, value in pairs(sound.modes or {}) do
-    print(name, value)
-end
+local ok, err = pcall(function()
+    sound.open(1)
+    sound.setWave(1, 0)
+    sound.setFrequency(1, 440)
+    sound.setVolume(1, 0.3)
+    sound.delay(2000)
+    sound.close(1)
+    sound.process()
+end)
 
-print("Available methods:")
-
-local component = require("component")
-for name in pairs(component.methods(sound.address)) do
-    print(name)
+if ok then
+    print("TEST COMPLETED")
+else
+    print("ERROR: " .. tostring(err))
 end
