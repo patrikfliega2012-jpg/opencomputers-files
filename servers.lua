@@ -13,9 +13,10 @@ V={"100001","100001","100001","100001","010010","010010","001100"}
 }
 
 local word = "SERVERS"
-local startX = 2
+local startX = 3
 local startY = 13
 local z = 24
+local spacing = 7
 
 for i = 1, #word do
     local letter = font[word:sub(i,i)]
@@ -23,7 +24,7 @@ for i = 1, #word do
     for y = 1, 7 do
         for x = 1, 6 do
             if letter[8-y]:sub(x,x) == "1" then
-                h.set(startX + (i-1)*6 + x, startY+y, z, 1)
+                h.set(startX + (i-1)*spacing + x, startY+y, z, 1)
             end
         end
     end
