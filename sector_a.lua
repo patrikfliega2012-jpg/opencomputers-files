@@ -3,6 +3,9 @@ local h = component.getPrimary("hologram")
 
 h.clear()
 
+-- Tier 2 colour palette
+h.setPaletteColor(1, 0x00FF00)
+
 local font = {
 S={"01111","10000","10000","01110","00001","00001","11110"},
 E={"11111","10000","10000","11110","10000","10000","11111"},
@@ -18,18 +21,16 @@ local startX = 2
 local startY = 13
 
 for i = 1, #text do
-  local pattern = font[text:sub(i,i)]
+    local pattern = font[text:sub(i,i)]
 
-  if pattern then
-    for y = 1, 7 do
-      for x = 1, 5 do
-        if pattern[y]:sub(x,x) == "1" then
-          h.set(startX+(i-1)*6+x-1, startY+y-1, 24, 1)
+    if pattern then
+        for y = 1, 7 do
+            for x = 1, 5 do
+                if pattern[8-y]:sub(x,x) == "1" then
+                    h.set(startX+(i-1)*6+x-1,
+                          startY+y-1, 24, 1)
+                end
+            end
         end
-      end
     end
-  end
 end
-
--- Native Tier 2 rotation
-h.setRotationSpeed(30, 0, 1, 0)
