@@ -18,7 +18,7 @@ for i = 1, #word do
     local letter = font[word:sub(i,i)]
     for y = 1, #letter do
         for x = 1, #letter[y] do
-            if letter[y]:sub(x,x) == "1" then
+           if letter[8-y]:sub(x,x) == "1" then
                 h.set(3 + (i-1)*6 + x, 33-(13+y), 24, 1)
             end
         end
