@@ -1,56 +1,51 @@
 
 -- =====================================
 -- QUANTUM LABS
--- RESONANCE
--- Original Half-Life-inspired theme
--- Approximately 60 seconds
+-- INDUSTRIAL PULSE
+-- Original industrial breakbeat
+-- OpenComputers
 -- =====================================
 
 local computer = require("computer")
 
-local melody = {
-    -- 0:00 - The facility
-    {196, 1.8}, {294, 1.8}, {392, 2.2},
-    {349, 1.8}, {294, 2.2},
+-- One step = 0.125 seconds
+-- 16 steps = 2 seconds
+-- 30 loops = 60 seconds
 
-    -- 0:10 - Something is wrong
-    {220, 1.8}, {330, 1.8}, {440, 2.2},
-    {392, 1.8}, {330, 2.2},
-
-    -- 0:20 - Resonance
-    {262, 1.8}, {392, 1.8}, {523, 2.5},
-    {494, 1.8}, {392, 2.2},
-
-    -- 0:30 - The experiment
-    {220, 1.5}, {262, 1.5}, {349, 2.0},
-    {392, 2.0}, {349, 2.0},
-
-    -- 0:40 - Alien signal
-    {165, 2.0}, {247, 2.0}, {330, 2.5},
-    {294, 2.0}, {247, 2.0},
-
-    -- 0:50 - Final transmission
-    {196, 2.0}, {262, 2.0}, {330, 2.0},
-    {294, 2.0}, {220, 2.5},
-
-    -- Ending
-    {196, 3.0}, {147, 3.0}
+local beat = {
+    110, 850, 0, 620,
+    240, 850, 110, 0,
+    110, 850, 620, 850,
+    240, 0, 110, 620
 }
 
-print("")
-print("================================")
-print("       QUANTUM LABS")
-print("          RESONANCE")
-print("================================")
-print("Audio transmission initiated...")
-print("")
+local function playStep(freq)
+    if freq > 0 then
+        local duration = 0.045
 
-for _, note in ipairs(melody) do
-    computer.beep(note[1], note[2])
-    computer.pullSignal(0.12)
+        if freq == 110 then
+            duration = 0.075
+        end
+
+        computer.beep(freq, duration)
+        computer.pullSignal(0.125 - duration)
+    else
+        computer.pullSignal(0.125)
+    end
 end
 
-computer.pullSignal(1)
-computer.beep(147, 3)
+print("")
+print("==============================")
+print("       QUANTUM LABS")
+print("      INDUSTRIAL PULSE")
+print("==============================")
+print("AUDIO SYSTEM ONLINE")
+print("")
 
-print("TRANSMISSION COMPLETE.")
+for bar = 1, 30 do
+    for _, freq in ipairs(beat) do
+        playStep(freq)
+    end
+end
+
+print("AUDIO SEQUENCE COMPLETE")
