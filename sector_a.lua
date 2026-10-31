@@ -9,7 +9,7 @@ local component = require("component")
 local computer = require("computer")
 
 local h = component.getPrimary("hologram")
-
+local h = component.proxy("fd9ed89d-3ed4-4034-aca4-cd3c9e8e9dce")
 -- Configuration
 local GREEN = 0x00FF00
 local CENTER_X = 24
