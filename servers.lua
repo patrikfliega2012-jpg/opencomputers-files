@@ -13,16 +13,20 @@ V={"100001","100001","100001","100001","010010","010010","001100"}
 }
 
 local word = "SERVERS"
+local startX = 2
+local startY = 13
+local z = 24
 
 for i = 1, #word do
     local letter = font[word:sub(i,i)]
-    for y = 1, #letter do
-        for x = 1, #letter[y] do
-           if letter[8-y]:sub(x,x) == "1" then
-                h.set(3 + (i-1)*6 + x, 33-(13+y), 24, 1)
+
+    for y = 1, 7 do
+        for x = 1, 6 do
+            if letter[8-y]:sub(x,x) == "1" then
+                h.set(startX + (i-1)*6 + x, startY+y, z, 1)
             end
         end
     end
 end
 
-print("SERVERS DISPLAY ONLINE")
+print("QUANTUM LABS - SERVERS ONLINE")
