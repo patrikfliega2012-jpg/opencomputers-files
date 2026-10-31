@@ -4,93 +4,145 @@ local sound = component.sound
 
 print("================================")
 print(" QUANTUM LABS")
-print(" CLOSING CREDITS THEME")
+print(" END CREDITS II")
+print(" 90 SECOND COMPOSITION")
 print("================================")
-print("Preparing audio channels...")
 
--- Stop any sounds left from an earlier run
-for ch = 1, 5 do
+-- Reset all eight channels
+for ch = 1, 8 do
     sound.close(ch)
 end
 
--- Channel 1-3: atmospheric chord layers
--- Channel 4: lead melody
--- Channel 5: bass
+local waves = sound.modes
 
-local function setup(ch, wave, volume, attack, decay, sustain, release)
-    sound.setWave(ch, wave)
-    sound.setVolume(ch, volume)
-    sound.setADSR(ch, attack, decay, sustain, release)
+-- Configure eight synthesis channels
+for ch = 1, 8 do
+    sound.setWave(ch, waves.sine)
+    sound.setVolume(ch, 0)
     sound.open(ch)
 end
 
-setup(1, sound.modes.sine, 0.22, 1800, 800, 0.75, 2500)
-setup(2, sound.modes.sine, 0.16, 1800, 800, 0.75, 2500)
-setup(3, sound.modes.triangle, 0.12, 1800, 800, 0.65, 2500)
-setup(4, sound.modes.sine, 0.20, 500, 500, 0.70, 1200)
-setup(5, sound.modes.sine, 0.18, 1000, 500, 0.65, 1800)
+-- Note frequencies
+local C2  = 65.41
+local G2  = 98.00
+local A2  = 110.00
+local F2  = 87.31
+local C3  = 130.81
+local E3  = 164.81
+local G3  = 196.00
+local A3  = 220.00
+local C4  = 261.63
+local E4  = 329.63
+local G4  = 392.00
+local A4  = 440.00
+local B4  = 493.88
+local C5  = 523.25
+local D5  = 587.33
+local E5  = 659.25
 
--- Four-chord progression: Am - F - C - G
+-- Four-chord progression
 local chords = {
-    {220.00, 261.63, 329.63, 110.00},
-    {174.61, 220.00, 261.63, 87.31},
-    {130.81, 164.81, 196.00, 65.41},
-    {196.00, 246.94, 293.66, 98.00}
+    {A3, C4, E4, A2},
+    {F3 or 174.61, A3, C4, F2},
+    {C3, E3, G3, C2},
+    {G3, B4, D5, G2}
 }
 
--- Original melody, one note per second
-local melodies = {
-    {440.00, 392.00, 329.63, 392.00},
-    {349.23, 329.63, 261.63, 329.63},
-    {392.00, 329.63, 293.66, 261.63},
-    {293.66, 329.63, 392.00, 329.63}
+-- Original melodic motifs
+local melody = {
+    {A4, E5, C5, B4, G4, E4, G4, A4,
+     C5, B4, G4, E4, A4, G4, E4, C4},
+
+    {F4, A4, C5, A4, G4, E4, D4, E4,
+     G4, A4, C5, B4, A4, G4, E4, C4},
+
+    {E4, G4, C5, E5, D5, C5, G4, E4,
+     A4, C5, E5, C5, B4, A4, G4, E4},
+
+    {A4, C5, E5, G5 or 783.99, E5, D5, C5, A4,
+     G4, A4, C5, E5, C5, A4, G4, A4}
 }
 
-local function playChord(chord, melody, volume)
+-- 4 beats per bar, 18 bars = 72 beats = 90 seconds
+local beatLength = 1250
+
+local function setChord(chord, volume)
     sound.setFrequency(1, chord[1])
     sound.setFrequency(2, chord[2])
     sound.setFrequency(3, chord[3])
-    sound.setFrequency(5, chord[4])
+    sound.setFrequency(4, chord[4])
 
-    sound.setVolume(1, 0.22 * volume)
-    sound.setVolume(2, 0.16 * volume)
-    sound.setVolume(3, 0.12 * volume)
+    sound.setVolume(1, 0.16 * volume)
+    sound.setVolume(2, 0.12 * volume)
+    sound.setVolume(3, 0.10 * volume)
+    sound.setVolume(4, 0.15 * volume)
+end
+
+local function setMelody(note, volume)
+    sound.setFrequency(5, note)
     sound.setVolume(5, 0.18 * volume)
 
-    for i = 1, 4 do
-        sound.setFrequency(4, melody[i])
-        sound.setVolume(4, 0.20 * volume)
-        sound.delay(1000)
-    end
+    sound.setFrequency(6, note * 2)
+    sound.setVolume(6, 0.035 * volume)
+
+    sound.setFrequency(7, note * 0.5)
+    sound.setVolume(7, 0.045 * volume)
+
+    sound.setFrequency(8, note * 1.5)
+    sound.setVolume(8, 0.025 * volume)
 end
 
-print("Playing closing theme...")
-print("Duration: approximately 48 seconds")
+print("SECTION 1 - THE AFTERMATH")
 
--- Three passes: opening, emotional rise, quiet ending
-for cycle = 1, 3 do
-    local volume = 1.0
+-- Four sections, 18 beats each
+for section = 1, 4 do
+    local volume
 
-    if cycle == 2 then
-        volume = 0.85
-    elseif cycle == 3 then
+    if section == 1 then
         volume = 0.55
+        print("The aftermath...")
+    elseif section == 2 then
+        volume = 0.80
+        print("Memories...")
+    elseif section == 3 then
+        volume = 1.00
+        print("The final revelation...")
+    else
+        volume = 0.45
+        print("Goodbye...")
     end
 
-    for i = 1, 4 do
-        playChord(chords[i], melodies[i], volume)
+    for beat = 1, 18 do
+        local chordIndex = math.floor((beat - 1) / 4) % 4 + 1
+        local motifIndex = math.floor((beat - 1) / 4) + 1
+        local noteIndex = (beat - 1) % 16 + 1
+
+        local chord = chords[chordIndex]
+        local note = melody[section][noteIndex]
+
+        setChord(chord, volume)
+        setMelody(note, volume)
+
+        -- Each delay is 1.25 seconds
+        sound.delay(beatLength)
     end
 end
 
--- Close channels and allow their release envelopes to fade
-for ch = 1, 5 do
+print("Closing audio channels...")
+
+-- Fade all channels
+for ch = 1, 8 do
+    sound.setVolume(ch, 0)
     sound.close(ch)
 end
 
-sound.delay(2500)
+sound.delay(2000)
 sound.process()
 
-print("")
-print("TRANSMISSION ENDED.")
-print("QUANTUM LABS - END CREDITS")
+print("================================")
+print(" TRANSMISSION TERMINATED")
+print(" QUANTUM LABS")
+print(" END CREDITS COMPLETE")
+print("================================")
+
 
