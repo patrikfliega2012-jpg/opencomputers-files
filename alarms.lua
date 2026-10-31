@@ -1,5 +1,4 @@
-local c = require("component")
-
-for address, name in pairs(c.list()) do
-    print(name .. " : " .. address)
+local s = require("component").proxy("d5769a0f-a7ae-4e2c-a834-69e7cdb60a8a")
+for k, v in pairs(s) do
+  print(k, v)
 end
