@@ -1,37 +1,52 @@
 
 -- =====================================
 -- QUANTUM LABS
--- SYSTEM AWAKENING
--- Original OpenComputers Theme
+-- THE FINAL TRANSMISSION
+-- Original closing theme
+-- OpenComputers
 -- =====================================
 
 local computer = require("computer")
 
 local melody = {
-    {523, 0.25}, {659, 0.25}, {784, 0.50},
-    {659, 0.25}, {880, 0.50}, {784, 0.50},
-    {587, 0.25}, {698, 0.25}, {880, 0.75},
+    -- Opening: quiet and mysterious
+    {392, 0.8}, {523, 1.2}, {659, 1.5},
+    {587, 1.0}, {523, 1.8},
 
-    {784, 0.25}, {659, 0.25}, {523, 0.50},
-    {440, 0.25}, {523, 0.25}, {659, 0.75},
+    -- The fading signal
+    {440, 1.0}, {523, 1.0}, {587, 2.0},
+    {523, 1.2}, {440, 2.0},
 
-    {784, 0.25}, {880, 0.25}, {1047, 0.75},
-    {880, 0.25}, {784, 0.25}, {659, 0.50},
+    -- A distant memory
+    {349, 1.0}, {440, 1.5}, {523, 2.0},
+    {494, 1.0}, {440, 2.5},
 
-    {587, 0.25}, {659, 0.25}, {784, 1.00},
-    {523, 0.75}
+    -- Final transmission
+    {392, 1.2}, {440, 1.2}, {523, 2.5},
+    {440, 1.5}, {392, 3.0},
+
+    -- Closing signal
+    {349, 1.5}, {392, 2.0}, {440, 3.0},
+    {392, 2.0}, {349, 4.0}
 }
 
-local function playTheme()
-    for _, note in ipairs(melody) do
-        computer.beep(note[1], note[2])
-        computer.pullSignal(0.04)
-    end
+print("")
+print("================================")
+print("       QUANTUM LABS")
+print("      FINAL TRANSMISSION")
+print("================================")
+print("Connection fading...")
+print("")
+
+for _, note in ipairs(melody) do
+    computer.beep(note[1], note[2])
+    computer.pullSignal(0.12)
 end
 
-print("QUANTUM LABS - SYSTEM AWAKENING")
-print("Playing startup theme...")
+computer.pullSignal(1)
 
-playTheme()
+computer.beep(262, 4)
 
-print("Theme complete.")
+print("")
+print("TRANSMISSION TERMINATED.")
+print("QUANTUM LABS - OFFLINE")
