@@ -1,5 +1,5 @@
 local component = require("component")
-local h = component.proxy("fd9ed89d-3ed4-4034-aca4-cd3c9e8e9dce")
+local h = component.proxy("9fd70615-e9a2-41d4-84df-58ee49f29849")
 
 h.clear()
 h.setPaletteColor(1, 0x00FF00)
