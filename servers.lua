@@ -12,7 +12,7 @@ V={"100001","100001","100001","100001","010010","010010","001100"}
 }
 
 local word = "SERVERS"
-local startX = 3
+local startX = 0
 local startY = 13
 local z = 24
 local spacing = 7
