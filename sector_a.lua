@@ -79,7 +79,7 @@ while true do
            rz >= 1 and rz <= 48 and
            p.y >= 1 and p.y <= 32 then
 
-            h.set(rx, p.y, rz, 1)
+            h.set(rx, 33-p.y, rz, 1)
         end
     end
 
