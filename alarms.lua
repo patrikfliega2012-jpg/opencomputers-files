@@ -1,46 +1,33 @@
 local component = require("component")
-local computer = require("computer")
 
-local SOUND_ADDRESS = "d5769a0f-a7ae-4e2c-a834-69e7cdb60a8a"
+local address = "d5769a0f-a7ae-4e2c-a834-69e7cdb60a8a"
+local sound = component.proxy(address)
 
-print("================================")
-print(" QUANTUM LABS - SOUND SYSTEM")
-print("================================")
+print("QUANTUM LABS")
+print("AUDIO TEST: TWO CHANNELS")
 
-if not component.isAvailable("sound") then
-    print("ERROR: Sound Card not detected!")
-    return
-end
+local ok, err = pcall(function()
+    sound.open(1)
+    sound.setWave(1, sound.modes.sine)
+    sound.setFrequency(1, 440)
+    sound.setVolume(1, 0.35)
 
-print("Sound Card detected!")
+    sound.open(2)
+    sound.setWave(2, sound.modes.sine)
+    sound.setFrequency(2, 554)
+    sound.setVolume(2, 0.35)
 
-local sound = component.proxy(SOUND_ADDRESS)
+    sound.delay(1500)
 
-print("Address: " .. SOUND_ADDRESS)
-print("")
-print("Checking available methods...")
+    sound.close(1)
+    sound.close(2)
 
-local ok, methods = pcall(component.methods, SOUND_ADDRESS)
+    sound.process()
+end)
 
-if ok and type(methods) == "table" then
-    for name, value in pairs(methods) do
-        print(tostring(name) .. " : " .. tostring(value))
-    end
+if ok then
+    print("AUDIO TEST COMPLETE")
 else
-    print("Method list unavailable.")
-    print("Checking component documentation...")
-
-    local docOK, docs = pcall(component.doc, SOUND_ADDRESS)
-
-    if docOK and type(docs) == "table" then
-        for name, description in pairs(docs) do
-            print(tostring(name) .. " : " .. tostring(description))
-        end
-    else
-        print("Documentation unavailable.")
-    end
+    print("AUDIO ERROR:")
+    print(tostring(err))
 end
-
-print("")
-print("Sound system inspection complete.")
-computer.beep(1000, 0.2)
