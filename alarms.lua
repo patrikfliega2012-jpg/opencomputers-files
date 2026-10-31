@@ -1,52 +1,43 @@
 
 -- =====================================
 -- QUANTUM LABS
--- THE FINAL TRANSMISSION
--- Original closing theme
--- OpenComputers
+-- AFTER THE EXPERIMENT
+-- Original 30-second ambient closing theme
 -- =====================================
 
 local computer = require("computer")
 
-local melody = {
-    -- Opening: quiet and mysterious
-    {392, 0.8}, {523, 1.2}, {659, 1.5},
-    {587, 1.0}, {523, 1.8},
+local sections = {
+    -- Distant opening
+    {330, 1.4}, {392, 1.4}, {494, 2.0},
+    {392, 1.5}, {330, 2.0},
 
-    -- The fading signal
-    {440, 1.0}, {523, 1.0}, {587, 2.0},
-    {523, 1.2}, {440, 2.0},
+    -- Something remains
+    {262, 1.8}, {330, 1.8}, {392, 2.2},
+    {349, 1.5}, {294, 2.0},
 
-    -- A distant memory
-    {349, 1.0}, {440, 1.5}, {523, 2.0},
-    {494, 1.0}, {440, 2.5},
+    -- Fading memories
+    {220, 1.8}, {262, 1.8}, {330, 2.2},
+    {294, 1.5}, {247, 2.0},
 
-    -- Final transmission
-    {392, 1.2}, {440, 1.2}, {523, 2.5},
-    {440, 1.5}, {392, 3.0},
+    -- Final signal
+    {196, 2.0}, {247, 2.0}, {294, 2.0},
+    {262, 2.0}, {220, 2.5},
 
-    -- Closing signal
-    {349, 1.5}, {392, 2.0}, {440, 3.0},
-    {392, 2.0}, {349, 4.0}
+    -- Silence approaches
+    {196, 2.0}, {165, 2.5}, {131, 3.0}
 }
 
-print("")
-print("================================")
-print("       QUANTUM LABS")
-print("      FINAL TRANSMISSION")
-print("================================")
-print("Connection fading...")
-print("")
+print("QUANTUM LABS")
+print("AFTER THE EXPERIMENT")
+print("Closing transmission...")
 
-for _, note in ipairs(melody) do
+for _, note in ipairs(sections) do
     computer.beep(note[1], note[2])
     computer.pullSignal(0.12)
 end
 
 computer.pullSignal(1)
+computer.beep(110, 2)
 
-computer.beep(262, 4)
-
-print("")
-print("TRANSMISSION TERMINATED.")
-print("QUANTUM LABS - OFFLINE")
+print("TRANSMISSION ENDED.")
