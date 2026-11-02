@@ -18,13 +18,9 @@ local patterns = {
 }
 
 local text = "QUANTUM LABS"
-local startX = 2
-local y = 2
-local z = 1
+local startX, y, z = 2, 2, 1
 local cursor = 0
-
--- Total width of the lettering
-local totalWidth = 45
+local totalWidth = 46
 
 for i = 1, #text do
     local letter = text:sub(i, i)
@@ -39,8 +35,9 @@ for i = 1, #text do
                 if glyph[row]:sub(col, col) == "1" then
                     local originalX = cursor + col - 1
                     local flippedX = startX + totalWidth - 1 - originalX
+                    local flippedY = y + 5 - row
 
-                    h.set(flippedX, y + row - 1, z, 1)
+                    h.set(flippedX, flippedY, z, 1)
                 end
             end
         end
@@ -49,4 +46,4 @@ for i = 1, #text do
     end
 end
 
-print("QUANTUM LABS: MIRRORED DISPLAY READY")
+print("QUANTUM LABS: 180-DEGREE ROTATION COMPLETE")
