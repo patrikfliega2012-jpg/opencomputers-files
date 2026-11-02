@@ -1,5 +1,5 @@
 local component = require("component")
-local h = component.proxy("0939bbb4-ebba-4fbb-9aee-a67f658ca134")
+local h = component.proxy("b7ec1184-1d84-4537-ae2d-29a4c8356da0")
 
 h.clear()
 h.setScale(1)
