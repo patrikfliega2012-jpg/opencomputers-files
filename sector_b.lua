@@ -6,20 +6,21 @@ h.setScale(1)
 h.setPaletteColor(1, 0x00FF00)
 
 local patterns = {
- Q = {"110","101","101","101","110"},
- U = {"101","101","101","101","111"},
- A = {"010","101","111","101","101"},
- N = {"101","111","111","111","101"},
- T = {"111","010","010","010","010"},
- M = {"101","111","111","101","101"},
- L = {"100","100","100","100","111"},
- B = {"110","101","110","101","110"},
- S = {"011","100","010","001","110"}
+ Q = {"110","101","101","101","111","001","110"},
+ U = {"101","101","101","101","101","101","111"},
+ A = {"010","101","101","111","101","101","101"},
+ N = {"101","111","111","111","111","111","101"},
+ T = {"111","010","010","010","010","010","010"},
+ M = {"101","111","111","101","101","101","101"},
+ L = {"100","100","100","100","100","100","111"},
+ B = {"110","101","101","110","101","101","110"},
+ S = {"011","100","100","010","001","001","110"}
 }
 
 local text = "QUANTUM LABS"
-local startX = 2
-local y = 6
+
+local startX = 1
+local y = 10
 local z = 1
 local cursor = 0
 local totalWidth = 46
@@ -32,12 +33,12 @@ for i = 1, #text do
     else
         local glyph = patterns[letter]
 
-        for row = 1, 5 do
+        for row = 1, 7 do
             for col = 1, 3 do
                 if glyph[row]:sub(col, col) == "1" then
                     local originalX = cursor + col - 1
                     local flippedX = startX + totalWidth - 1 - originalX
-                    local flippedY = y + 5 - row
+                    local flippedY = y + 7 - row
 
                     h.set(flippedX, flippedY, z, 1)
                 end
@@ -48,4 +49,4 @@ for i = 1, #text do
     end
 end
 
-print("QUANTUM LABS - FLOATING DISPLAY ONLINE")
+print("QUANTUM LABS - FLOATING HOLOGRAM ONLINE")
