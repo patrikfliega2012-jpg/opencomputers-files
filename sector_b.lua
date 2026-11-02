@@ -3,6 +3,7 @@ local h = component.proxy("56aebca3-927f-496b-b784-f570c68c5288")
 
 h.clear()
 h.setScale(1)
+h.setPaletteColor(1, 0x00FF00)
 
 local patterns = {
  Q = {"110","101","101","101","110"},
@@ -17,9 +18,7 @@ local patterns = {
 }
 
 local text = "QUANTUM LABS"
-local x = 2
-local y = 2
-local z = 1
+local x, y, z = 2, 2, 1
 
 for i = 1, #text do
     local letter = text:sub(i, i)
@@ -32,7 +31,7 @@ for i = 1, #text do
         for row = 1, 5 do
             for col = 1, 3 do
                 if glyph[row]:sub(col, col) == "1" then
-                    h.set(x + col - 1, y + row - 1, z, 0x00FF00)
+                    h.set(x + col - 1, y + row - 1, z, 1)
                 end
             end
         end
@@ -40,3 +39,5 @@ for i = 1, #text do
         x = x + 4
     end
 end
+
+print("QUANTUM LABS hologram rendered.")
