@@ -1,4 +1,3 @@
-
 local component = require("component")
 local h = component.proxy("b7ec1184-1d84-4537-ae2d-29a4c8356da0")
 
@@ -19,9 +18,8 @@ local patterns = {
 }
 
 local text = "QUANTUM LABS"
-
 local startX = 1
-local y = 13
+local y = 10
 local z = 1
 local cursor = 0
 local totalWidth = 46
@@ -50,9 +48,4 @@ for i = 1, #text do
     end
 end
 
--- Logo underline
-for x = 0, totalWidth - 1 do
-    h.set(startX + totalWidth - 1 - x, y, z, 1)
-end
-
-print("QUANTUM LABS // SPACED LOGO ONLINE")
+print("QUANTUM LABS // HOLOGRAM ONLINE")
