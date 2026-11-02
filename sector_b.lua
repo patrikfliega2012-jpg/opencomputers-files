@@ -18,7 +18,9 @@ local patterns = {
 }
 
 local text = "QUANTUM LABS"
-local startX, y, z = 2, 2, 1
+local startX = 2
+local y = 6
+local z = 1
 local cursor = 0
 local totalWidth = 46
 
@@ -46,4 +48,4 @@ for i = 1, #text do
     end
 end
 
-print("QUANTUM LABS: 180-DEGREE ROTATION COMPLETE")
+print("QUANTUM LABS - FLOATING DISPLAY ONLINE")
