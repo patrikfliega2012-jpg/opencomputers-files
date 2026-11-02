@@ -19,8 +19,8 @@ local patterns = {
 
 local text = "QUANTUM LABS"
 local startX = 1
-local y = 10
-local z = 1
+local y = 2
+local z = 2
 local cursor = 0
 local totalWidth = 46
 
