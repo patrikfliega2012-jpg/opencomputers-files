@@ -1,3 +1,4 @@
+
 local component = require("component")
 local h = component.proxy("5a0ec37e-c29f-421b-a765-9ba9c120e63f")
 
@@ -20,7 +21,7 @@ local patterns = {
 local text = "QUANTUM LABS"
 local startX = 1
 local y = 2
-local z = 2
+local z = 0
 local cursor = 0
 local totalWidth = 46
 
@@ -36,10 +37,13 @@ for i = 1, #text do
             for col = 1, 3 do
                 if glyph[row]:sub(col, col) == "1" then
                     local originalX = cursor + col - 1
-                    local flippedX = startX + totalWidth - 1 - originalX
-                    local flippedY = y + 7 - row
+                    local originalY = row - 1
 
-                    h.set(flippedX, flippedY, z, 1)
+                    -- Rotate 180 degrees
+                    local rotatedX = startX + totalWidth - 1 - originalX
+                    local rotatedY = y + 6 - originalY
+
+                    h.set(rotatedX, rotatedY, z, 1)
                 end
             end
         end
@@ -48,4 +52,5 @@ for i = 1, #text do
     end
 end
 
-print("QUANTUM LABS // HOLOGRAM ONLINE")
+print("QUANTUM LABS // REAR-FACING DISPLAY ONLINE")
+
